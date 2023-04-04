@@ -3,22 +3,23 @@
 /**
  * add_nodeint - add  a new node at the beginning.
  * @head: head for struct listint_t.
- * @n: node1.
+ * @n: new
  * *Return: Address of new element or NULL if failed.
  */
 
 listint_t *add_nodeint(listint_t **head, const int n)
 {
-	listint_t *node1;
+	listint_t *newnode;
 
-	node1 = malloc(sizeof(listint_t));
+	newnode = malloc(sizeof(listint_t));
 
-	if (node1 == NULL)
+	if (newnode == NULL)
 		return (NULL);
-		node1->n = n;
-		node1->next = *head;
 
-		*head = node1;
+	newnode->n = n;
+	newnode->next = *head;
+
+	*head = newnode;
 
 	return (*head);
 }
