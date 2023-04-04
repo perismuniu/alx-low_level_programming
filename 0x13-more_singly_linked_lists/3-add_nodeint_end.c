@@ -3,26 +3,26 @@
 /**
  *add_nodeint_end - adds a new node at the end of a list
  *@head : head for struct listint_t.
- *@n: lastnode.
+ *@n: newnode.
  * Return: the address of the new element, or NULL if it failed.
  */
 
 listint_t *add_nodeint_end(listint_t **head, const int n)
 {
-	listint_t *lastnode, *temp;
+	listint_t *newnode, *temp;
 
-	lastnode = (listint_t *)malloc(sizeof(listint_t));
+	newnode = malloc(sizeof(listint_t));
 
-	if (lastnode == NULL)
-	{
+	if (newnode == NULL)
 		return (NULL);
-		lastnode->n = n;
-		lastnode->next = NULL;
-	}
+
+	newnode->n = n;
+	newnode->next = NULL;
+
 	if (*head == NULL)
 	{
-		*head = lastnode;
-		return (lastnode);
+		*head = newnode;
+		return (newnode);
 	}
 	else
 	{
@@ -31,9 +31,9 @@ listint_t *add_nodeint_end(listint_t **head, const int n)
 		{
 		temp = temp->next;
 		}
-		temp->next = lastnode;
+		temp->next = newnode;
 	}
 
-	return (lastnode);
+	return (newnode);
 }
 
