@@ -18,6 +18,11 @@ listint_t *add_nodeint_end(listint_t **head, const int n)
 		printf("Failed\n");
 		return (NULL);
 	}
+	if (*head == NULL)
+	{
+		*head = lastnode;
+		return (lastnode);
+	}
 	else
 	{
 		lastnode->n = n;
