@@ -5,8 +5,8 @@
 
 /**
  * listint_len - returns the number of elements n in a linked list.
- * @h -head of listint_t
- * * Return: number of elements n
+ * @h: head of a linked list.
+ * Return: number of elements n
  */
 
 size_t listint_len(const listint_t *h)
