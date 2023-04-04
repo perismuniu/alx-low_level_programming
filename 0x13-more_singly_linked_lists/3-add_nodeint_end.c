@@ -17,6 +17,8 @@ listint_t *add_nodeint_end(listint_t **head, const int n)
 	{
 		printf("Failed\n");
 		return (NULL);
+		lastnode->n = n;
+		lastnode->next = NULL;
 	}
 	if (*head == NULL)
 	{
@@ -25,14 +27,12 @@ listint_t *add_nodeint_end(listint_t **head, const int n)
 	}
 	else
 	{
-		lastnode->n = n;
-		lastnode->next = NULL;
 		temp = *head;
 		while (temp->next !=  NULL)
 		{
 		temp = temp->next;
-		temp->next = lastnode;
 		}
+		temp->next = lastnode;
 	}
 
 	return (lastnode);
