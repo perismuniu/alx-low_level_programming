@@ -1,9 +1,9 @@
-#include "list.h"
+#include "lists.h"
 
 /**
  * add_nodeint - add  a new node at the beginning.
- * @*head: head node.
- * @n: node1
+ * @*head: head for struct listint_t.
+ * @n: node1.
  * *Return: Address of new element or NULL if failed.
  */
 
@@ -13,7 +13,7 @@ listint_t *add_nodeint(listint_t **head, const int n)
 
 	node1 = (listint_t *)malloc(sizeof(listint_t));
 
-	if (node 1 == NULL)
+	if (node1 == NULL)
 	{
 		printf("Failed\n");
 		return (NULL);
