@@ -3,24 +3,21 @@
 /**
  * pop_listint -  function that deletes the head node.
  *@head: head of linked list.
- * Return: head node’s data (n).
+ * Return: head node’s data .
  */
 
 int pop_listint(listint_t **head)
 {
-	int n;
+	int data = 0;
 	listint_t *del;
 
 	if (*head == NULL)
-	{
-		printf("Fail\n");
-	}
-	else
-	{
-		del = *head;
-		*head = del->next;
-		printf("%d\n", del->n);
-		free(del);
-	}
-	return (n);
+	return (data);
+
+	del = *head;
+	data  = del->n;
+	free(*head);
+	*head = del->next;
+
+	return (data);
 }
