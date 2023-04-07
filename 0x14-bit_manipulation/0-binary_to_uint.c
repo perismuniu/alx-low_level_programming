@@ -10,21 +10,25 @@ unsigned int binary_to_uint(const char *b)
 {
 	unsigned int  uint = 0;
 	int j;
-	size_t len = strlen(b);
 
 	if (b == NULL)
 		return (0);
 
-	for (j = 0; j < len; j++)
+	for (j = 0; b[j] != '\0'; j++)
 	{
-		if (b[j] == '1')
+		if (b[j] == '0')
 		{
-			uint += (unsigned int)pow(2, len - 1, -j);
+			uint = (uint << 1) | 0;
 		}
-		else if (b[j] != '0')
+		else if (b[j] == '1')
+		{
+			uint = (uint << 1) | 1;
+		}
+		else
 		{
 			return (0);
 		}
 	}
+
 	return (uint);
 }
