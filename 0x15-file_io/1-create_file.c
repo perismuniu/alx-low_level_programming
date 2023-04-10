@@ -9,18 +9,18 @@
 
 int append_text_to_file(const char *filename, char *text_content)
 {
-	FILE *fp = NULL;
+	int file_d;
 	size_t length;
 	size_t wr;
 
-	if (filename == NULL || text_content == NULL)
+	if (filename == NULL)
 	{
 		return (-1);
 	}
 
-	fp = fopen(filename, "w");
+	file_d = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 600);
 
-	if (fp == NULL)
+	if (file_d == -1)
 	{
 		return (-1);
 	}
@@ -28,14 +28,14 @@ int append_text_to_file(const char *filename, char *text_content)
 	if (text_content != NULL)
 	{
 		length = strlen(text_content);
-		wr = fwrite(text_content, 1, length, fp);
-	if (wr != length)
+		wr = write(file_d, text_content, length);
+	if (wr == -1)
 	{
-		fclose(fp);
-		return (1);
+		close(file_d);
+		return (-1);
 	}
 	}
 
-	fclose(fp);
+	close(file_d);
 	return (1);
 }
