@@ -10,38 +10,33 @@
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	FILE *fp = 0;
-	ssize_t a;
+	int file_d;
+	char *buf;
+	ssize_t br;
+	ssize_t bw;
 
 	if (filename == NULL)
 	{
 		return (0);
 	}
 
-	fp = fopen("filename", "r");
+	file_d = open(filename, O_RDONLY);
 
-	if (fp == NULL)
+	if (file_d == -1)
 	{
 		return (0);
 	}
 
-	char buf[letters + 1];
-
-	a = fread(buf, sizeof(char), letters, fp);
-	if (a == 0)
+	buf = malloc(sizeof(char) * letters);
+	if (buf == NULL)
 	{
-		fclose(fp);
 		return (0);
 	}
 
-	buf[a] = '\0';
+	br = read(file_d, buf, letters);
+	bw = write(STDOUT_FILENO, buf, br);
 
-
-	fclose(fp);
-
-	return (a);
+	close(file_d);
+	free(buf);
+	return (bw);
 }
-
-
-
-
