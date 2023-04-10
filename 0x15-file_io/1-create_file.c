@@ -10,8 +10,8 @@
 int create_file(const char *filename, char *text_content)
 {
 	int file_d;
-	int words;
-	int wr;
+	size_t length;
+	size_t wr;
 
 	if (filename == NULL)
 	{
@@ -27,11 +27,11 @@ int create_file(const char *filename, char *text_content)
 
 	if (text_content != NULL)
 	{
-	text_content = "";
-	for (words = 0; text_content[words]; words++);
-	wr = write(file_d, text_content, words);
+		length = strlen(text_content);
+		wr = write(file_d, text_content, length);
 	if (wr == -1)
 	{
+		close(file_d);
 		return (-1);
 	}
 	}
