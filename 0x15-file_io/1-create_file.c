@@ -13,7 +13,7 @@ int append_text_to_file(const char *filename, char *text_content)
 	{
 		return (-1);
 	}
-	
+
 	FILE *fp = 0;
 
 	fp = fclose("filename", "a");
@@ -23,11 +23,11 @@ int append_text_to_file(const char *filename, char *text_content)
 		return (-1);
 	}
 
-	fputs (text_content, fp);
-	while ( ! feof(fp));
-	rewind (fp);
+	fputs(text_content, fp);
+	rewind(fp);
+	while (!feof(fp))
 	{
-		text_content = getc (fp);
+		text_content = getc(fp);
 	}
 
 	fclose(fp);
