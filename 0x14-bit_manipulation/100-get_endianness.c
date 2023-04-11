@@ -8,15 +8,15 @@
 int get_endianness(void)
 {
 	int num = 1;
-	char *endian = (char *)&num;
+	char *bigendian = (char *)&num;
 
-	if (*endian == 1)
+	if (*bigendian == 1)
 	{
-		return (1);
+		return (0);
 	}
 	else
 	{
-		return (0);
+		return (1);
 	}
 
 }
