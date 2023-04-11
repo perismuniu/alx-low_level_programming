@@ -8,9 +8,9 @@
 int get_endianness(void)
 {
 	int a = 1;
-	int *p = &a;
+	char *p = (char *)&a;
 
-	if (p == 1)
+	if (*p == 1)
 	{
 		printf("Little Endian\n");
 		return (1);
