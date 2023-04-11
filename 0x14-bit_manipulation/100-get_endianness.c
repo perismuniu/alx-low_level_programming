@@ -7,16 +7,16 @@
 
 int get_endianness(void)
 {
-	int num = 1;
-	char *bigendian = (char *)&num;
+	int number = 1;
+	char *p = (char *)&number;
 
-	if (*bigendian == 1)
+	if (*p == 1)
 	{
-		return (0);
+		return (1);
 	}
 	else
 	{
-		return (1);
+		return (0);
 	}
 
 }
