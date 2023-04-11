@@ -10,14 +10,12 @@ int get_endianness(void)
 	int a = 1;
 	char *p = (char *)&a;
 
-	if (*p == 1)
+	if (*(char *)&a == 1)
 	{
-		printf("Little Endian\n");
 		return (1);
 	}
 	else
 	{
-		printf("Big Endian\n");
 		return (0);
 	}
 
