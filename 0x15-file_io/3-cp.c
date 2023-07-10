@@ -9,8 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-	int file_from;
-	int file_to;
+	int file_from, file_to;
 	char buffer[BUFFER_SIZE];
 	ssize_t bytes_read, bytes_written;
 
@@ -19,28 +18,28 @@ int main(int argc, char *argv[])
 		return (97); }
 	file_from = open(argv[1], O_RDONLY);
 	if (file_from == -1)
-	{	dprintf(STDERR_FILENO, "Error: Can't read from file NAME_OF_THE_FILE\n");
+	{	dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		return (98); }
 
 	file_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (file_to == -1)
-	{	dprintf(STDERR_FILENO, "Error: Can't write to NAME_OF_THE_FILE\n");
+	{	dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		close(file_from);
 		return (99); }
 
 	while ((bytes_read = read(file_from, buffer, sizeof(buffer))) > 0)
 	{	bytes_written = write(file_to, buffer, bytes_read);
 		if (bytes_written != bytes_read)
-		{	dprintf(STDERR_FILENO, "Error: Can't close fd FD_VALUE\n");
+		{	dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_to);
 			close(file_from);
 			close(file_to);
 			return (100); }}
 
 	if (close(file_from) == -1)
-	{	dprintf(STDERR_FILENO, "Error: Can't close fd FD_VALUE\n");
+	{	dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
 		return (100); }
 	if (close(file_to) == -1)
-	{	dprintf(STDERR_FILENO, "Error: Can't close fd FD_VALUE\n");
+	{	dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_to);
 		return (100); }
 	if (chmod(argv[2], 0644) == -1)
 	{	dprintf(STDERR_FILENO, "Error: Can't set permissions %s\n", argv[2]);
