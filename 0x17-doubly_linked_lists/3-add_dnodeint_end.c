@@ -37,22 +37,3 @@ dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 	}
 	return (new_node);
 }
-
-/**
- * free_dlistint - Frees all the nodes of a doubly linked list.
- * @head: A pointer to the head node of the list.
- *
- * Description: This function deallocates memory occupied by each node
- * in the doubly linked list and sets the 'head' to NULL.
- */
-
-void free_dlistint(dlistint_t *head)
-{
-	while (head != NULL)
-	{
-		dlistint_t *temp = head;
-
-		head = head->next;
-		free(temp);
-	}
-}
