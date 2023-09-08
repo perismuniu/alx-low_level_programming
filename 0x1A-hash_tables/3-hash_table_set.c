@@ -10,38 +10,42 @@
 
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	int index;
+	unsigned long int index;
 	hash_node_t *new_element;
 	hash_node_t *current;
+	char *value_copy, *key_copy;
 
 	if (!ht || !key || !value)
-	{	return (0); }
-	index = hash_djb2((const unsigned char *)key) % ht->size;
-	new_element = (hash_node_t *)malloc(sizeof(hash_node_t));
-	if (!new_element)
-	{	return (0); }
-	new_element->key = strdup(key);
-	if (!new_element->key)
-	{	free(new_element);
-		return (0); }
-	new_element->value = strdup(value);
-	if (!new_element->value)
+		return (0);
+	value_copy = strdup(value);
+	if (!value_copy)
+		return (0);
+	index =  hash_djb2((const unsigned char *)key) % ht->size;
+	current = ht->array[index];
+
+	while (current)
 	{
-		free(new_element->key);
+		if (!strcmp(key, current->key))
+		{	free(current->value);
+			current->value = value_copy;
+			return (1);
+		}
+		current = current->next;
+	}
+	new_element = calloc(1, sizeof(hash_node_t));
+	if (!new_element)
+	{	free(value_copy);
+		return (0);
+	}
+	key_copy = strdup(key);
+	if (!key_copy)
+	{	free(value_copy);
 		free(new_element);
 		return (0);
 	}
-	new_element->next = NULL;
-
-	if (ht->array[index] == NULL)
-	{	ht->array[index] = new_element; }
-	else
-	{	current = ht->array[index];
-		while (current->next)
-		{
-			current = current->next;
-		}
-		current->next = new_element;
-	}
+	new_element->key = key_copy;
+	new_element->value = value_copy;
+	new_element->next = ht->array[index];
+	ht->array[index] = new_element;
 	return (1);
 }
